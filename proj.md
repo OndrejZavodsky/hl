@@ -23,12 +23,15 @@ Design principle: \*\*pipeline.yml owns ordering. Each tool directory is portabl
 ```yaml
 steps:
   - name: terraform-vpc
+    tool: terraform
     dir: tools/terraform-vpc
     depends_on: []
   - name: ansible-base
+    tool: ansible
     dir: tools/ansible-base
     depends_on: [terraform-vpc]
   - name: docker-services
+    tool: docker-compose
     dir: tools/docker-services
     depends_on: [ansible-base]
 ```
