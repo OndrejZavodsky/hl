@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"slices"
 	"strings"
 
 	"gopkg.in/yaml.v3"
@@ -13,7 +14,7 @@ import (
 
 type Step struct {
 	Name      string   `yaml:"name"`
-	Tool      string   `yaml: "tool"`
+	Tool      string   `yaml:"tool"`
 	Dir       string   `yaml:"dir"`
 	DependsOn []string `yaml:"depends_on"`
 }
@@ -39,21 +40,12 @@ func LoadSteps(filePath string) (Pipeline, error) {
 	return Pipeline{cfg.Steps}, nil
 }
 
-func contains(slice []string, target string) bool {
-	for _, item := range slice {
-		if item == target {
-			return true
-		}
-	}
-	return false
-}
-
 func CheckTools(steps Pipeline) error {
 	var checked []string
 	var missing []string
 
 	for _, step := range steps.Steps {
-		if step.Tool == "" || contains(checked, step.Tool) {
+		if step.Tool == "" || slices.Contains(checked, step.Tool) {
 			continue
 		}
 		checked = append(checked, step.Tool)
