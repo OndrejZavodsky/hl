@@ -33,6 +33,8 @@ steps:
     depends_on: [ansible-base]
 ```
 
+the name must be in the format tool-name
+
 ## 4. Execution model
 
 ### Config reading → graph → stages
@@ -107,7 +109,7 @@ internal/orchestrator/    # stage execution, parallel dispatch, rollback logic
 ## 6. Build checklist (source of truth, mapped to design above)
 
 - [x] Parse CLI flags and inputs
-- [ ] Validate config files passed to CLI (pipeline.yml + tool.yml files) are well-formed
+- [x] Validate config files passed to CLI (pipeline.yml + tool.yml files) are well-formed
 - [ ] Check system binaries: terraform, ansible-playbook, docker in `$PATH`
 - [ ] Structured logging / terminal feedback mechanism
 - [ ] Config reader: pipeline.yml → dependency graph → `[][]Runner`
