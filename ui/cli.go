@@ -10,10 +10,10 @@ import (
 )
 
 type Config struct {
-	configFile string
-	backupFile string
-	doBackup   bool
-	validate   bool
+	ConfigFile string
+	BackupFile string
+	DoBackup   bool
+	Validate   bool
 }
 
 func ParseFlags() Config {
@@ -22,13 +22,13 @@ func ParseFlags() Config {
 	backup := flag.Bool("backup", false, "switches functionality to only create a backup")
 	validate := flag.Bool("validate", false, "switches functionality to only validate the config")
 	flag.Parse()
-	if err := ValidateFilePath(*cf); err != nil {
+	if err := validateFilePath(*cf); err != nil {
 		return Config{configFile: *cf, backupFile: *bf, doBackup: *backup, validate: *validate}
 	}
 	return Config{}
 }
 
-func ValidateFilePath(path string) error {
+func validateFilePath(path string) error {
 	cleanPath := filepath.Clean(path)
 	info, err := os.Stat(cleanPath)
 	if err != nil {

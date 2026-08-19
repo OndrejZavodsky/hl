@@ -113,7 +113,7 @@ internal/orchestrator/    # stage execution, parallel dispatch, rollback logic
 
 - [x] Parse CLI flags and inputs
 - [x] Validate config files passed to CLI (pipeline.yml + tool.yml files) are well-formed
-- [ ] Check system binaries: terraform, ansible-playbook, docker in `$PATH`
+- [x] Check system binaries: terraform, ansible-playbook, docker in `$PATH`
 - [ ] Structured logging / terminal feedback mechanism
 - [ ] Config reader: pipeline.yml → dependency graph → `[][]Runner`
 - [ ] Runner interface definition
